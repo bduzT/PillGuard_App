@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, R.string.fields_empty, Toast.LENGTH_SHORT).show();
                 } else {
                     // Simulate successful login (will be replaced with actual authentication later)
-                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
                     startActivity(intent);
                     finish();
                 }

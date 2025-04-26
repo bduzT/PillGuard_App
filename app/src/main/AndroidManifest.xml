@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PillGuard"
         tools:targetApi="31">
-        
+
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
         <activity
             android:name=".RegisterActivity"
             android:exported="false"
@@ -30,18 +30,54 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".DashboardActivity" />
         </activity>
-        
+
         <activity
             android:name=".DashboardActivity"
             android:exported="false" />
-        
+
         <activity
             android:name=".PillScheduleActivity"
             android:exported="false" />
-        
+
         <activity
             android:name=".UnlockBoxActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".AdminDashboardActivity"
+            android:exported="true" />
+        <activity
+            android:name=".UserListActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AssignNursesActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ScheduleLogDataActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".UserListActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AddPatientActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AddNurseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddPatientActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".AddNurseActivity"
+            android:exported="false" />
+
+
     </application>
 
 </manifest>
