@@ -4,8 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="32dp"
-    android:gravity="center">
+    android:gravity="start|top">
 
+    <!-- Kullanıcı Ekleme Başlığı -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,18 +16,44 @@
         android:layout_marginBottom="20dp"/>
 
     <Button
-        android:id="@+id/btnAddPatient"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Patient"
-        android:layout_marginBottom="16dp"/>
-
-    <Button
         android:id="@+id/btnAddNurse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Nurse"
         android:layout_marginBottom="16dp"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroupUserType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/radioPatients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Patients"/>
+
+        <RadioButton
+            android:id="@+id/radioNurses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nurses"/>
+    </RadioGroup>
+
+
+    <Spinner
+        android:id="@+id/spinnerSort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewUserList"

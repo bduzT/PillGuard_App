@@ -15,7 +15,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     private ArrayList<String> userList;
     private OnItemClickListener listener;
 
-    // Constructor
     public UserAdapter(ArrayList<String> users, OnItemClickListener listener) {
         this.userList = users;
         this.listener = listener;
@@ -29,13 +28,22 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     @Override
     public void onBindViewHolder(UserViewHolder holder, int position) {
-        String patient = userList.get(position);
-        holder.tvPatientName.setText(patient);
-        holder.tvPatientDetails.setText("Details");
+        String user = userList.get(position);
 
+        holder.tvUserName.setText(user);
+        holder.tvUserDetails.setText("Details");
 
-        holder.ivEditPatient.setOnClickListener(v -> listener.onEditClick(position));
-        holder.ivDeletePatient.setOnClickListener(v -> listener.onDeleteClick(position));
+        holder.ivEditUser.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onEditClick(position);
+            }
+        });
+
+        holder.ivDeleteUser.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onDeleteClick(position);
+            }
+        });
     }
 
     @Override
@@ -43,14 +51,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         return userList.size();
     }
 
-
     public static class UserViewHolder extends RecyclerView.ViewHolder {
-        TextView tvPatientName, tvPatientDetails;
-        ImageView ivPatientPhoto, ivEditPatient, ivDeletePatient;
+        TextView tvUserName, tvUserDetails;
+        ImageView ivEditUser, ivDeleteUser;
 
-
+        public UserViewHolder(View itemView) {
+            super(itemView);
+            tvUserName = itemView.findViewById(R.id.tvUserName);
+            tvUserDetails = itemView.findViewById(R.id.tvUserDetails);
+            ivEditUser = itemView.findViewById(R.id.ivEditUser);
+            ivDeleteUser = itemView.findViewById(R.id.ivDeleteUser);
+        }
     }
-
 
     public interface OnItemClickListener {
         void onEditClick(int position);
