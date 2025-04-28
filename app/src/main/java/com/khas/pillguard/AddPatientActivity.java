@@ -44,7 +44,7 @@ public class AddPatientActivity extends AppCompatActivity {
                 intent.putExtra("id", id);
                 intent.putExtra("dob", dob);
                 intent.putExtra("gender", gender);
-                intent.putExtra("type", "Patient");  // "Patient" bilgisini ekliyoruz
+                intent.putExtra("type", "Patient");
                 startActivity(intent);
             }
         });

@@ -30,7 +30,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         btnAssignNurses.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AdminDashboardActivity.this, AssignNursesActivity.class);
+                Intent intent = new Intent(AdminDashboardActivity.this, AssignNurseActivity.class);
                 startActivity(intent);
             }
         });

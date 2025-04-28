@@ -1,5 +1,7 @@
 package com.khas.pillguard.adapters;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,15 +9,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.khas.pillguard.R;
-
+import com.khas.pillguard.models.User;
 import java.util.ArrayList;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
 
-    private ArrayList<String> userList;
+    private ArrayList<User> userList;
     private OnItemClickListener listener;
 
-    public UserAdapter(ArrayList<String> users, OnItemClickListener listener) {
+    public UserAdapter(ArrayList<User> users, OnItemClickListener listener) {
         this.userList = users;
         this.listener = listener;
     }
@@ -28,20 +30,27 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     @Override
     public void onBindViewHolder(UserViewHolder holder, int position) {
-        String user = userList.get(position);
+        User user = userList.get(position);
 
-        holder.tvUserName.setText(user);
-        holder.tvUserDetails.setText("Details");
+        holder.tvUserName.setText(user.getFullName());
+        holder.tvUserDetails.setText(user.getDateOfBirth());
+
+        if (user.getPhotoBytes() != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(user.getPhotoBytes(), 0, user.getPhotoBytes().length);
+            holder.patientPhoto.setImageBitmap(bitmap);
+        } else {
+            holder.patientPhoto.setImageResource(android.R.drawable.ic_menu_gallery);
+        }
 
         holder.ivEditUser.setOnClickListener(v -> {
             if (listener != null) {
-                listener.onEditClick(position);
+                listener.onEditClick(user);
             }
         });
 
         holder.ivDeleteUser.setOnClickListener(v -> {
             if (listener != null) {
-                listener.onDeleteClick(position);
+                listener.onDeleteClick(user.getId());
             }
         });
     }
@@ -53,7 +62,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     public static class UserViewHolder extends RecyclerView.ViewHolder {
         TextView tvUserName, tvUserDetails;
-        ImageView ivEditUser, ivDeleteUser;
+        ImageView ivEditUser, ivDeleteUser, patientPhoto;
 
         public UserViewHolder(View itemView) {
             super(itemView);
@@ -61,11 +70,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             tvUserDetails = itemView.findViewById(R.id.tvUserDetails);
             ivEditUser = itemView.findViewById(R.id.ivEditUser);
             ivDeleteUser = itemView.findViewById(R.id.ivDeleteUser);
+            patientPhoto = itemView.findViewById(R.id.patientPhoto);
         }
     }
 
     public interface OnItemClickListener {
-        void onEditClick(int position);
-        void onDeleteClick(int position);
+        void onEditClick(User user);
+        void onDeleteClick(int userId);
     }
 }

@@ -32,32 +32,25 @@
         android:id="@+id/etNurseDOB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Nurse DOB (dd/mm/yyyy)"
+        android:hint="Enter Nurse Date of Birth (dd/mm/yyyy)"
         android:inputType="date"
         android:layout_marginBottom="20dp"/>
 
-    <RadioGroup
-        android:id="@+id/radioGroupGender"
+    <EditText
+        android:id="@+id/etNurseContact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="20dp">
-
-        <RadioButton
-            android:id="@+id/radioMale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Male" />
-
-        <RadioButton
-            android:id="@+id/radioFemale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Female" />
-    </RadioGroup>
-
-
-
+        android:hint="Enter Nurse Contact Info"
+        android:inputType="textEmailAddress"
+        android:layout_marginBottom="20dp"/>
+    <ImageView
+        android:id="@+id/ivPhotoPreview"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_background"/>
     <Button
         android:id="@+id/btnUploadPhoto"
         android:layout_width="match_parent"
@@ -71,4 +64,5 @@
         android:layout_height="wrap_content"
         android:text="Add Nurse"
         android:layout_marginTop="20dp"/>
+
 </LinearLayout>

@@ -51,7 +51,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".AssignNursesActivity"
+            android:name=".AssignNurseActivity"
             android:exported="false" />
 
         <activity
@@ -59,23 +59,14 @@
             android:exported="false" />
 
         <activity
-            android:name=".UserListActivity"
-            android:exported="false" />
-
-        <activity
             android:name=".AddPatientActivity"
             android:exported="false" />
 
         <activity
             android:name=".AddNurseActivity"
             android:exported="false" />
-        <activity
-            android:name=".AddPatientActivity"
-            android:exported="false" />
 
-        <activity
-            android:name=".AddNurseActivity"
-            android:exported="false" />
+        <activity android:name=".EditUserActivity" android:exported="false"/>
 
 
     </application>
