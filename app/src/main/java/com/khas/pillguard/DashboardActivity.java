@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.khas.pillguard.adapters.MedicationAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,22 +28,18 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        // Initialize UI components
         tvWelcome = findViewById(R.id.tvWelcome);
         btnViewSchedule = findViewById(R.id.btnViewSchedule);
         btnUnlockBox = findViewById(R.id.btnUnlockBox);
         rvUpcomingMeds = findViewById(R.id.rvUpcomingMeds);
 
-        // Set welcome message with user name (placeholder for now)
         tvWelcome.setText(getString(R.string.welcome_message, "User"));
 
-        // Set up RecyclerView
         medicationList = generateMockData();
         MedicationAdapter adapter = new MedicationAdapter(medicationList);
         rvUpcomingMeds.setLayoutManager(new LinearLayoutManager(this));
         rvUpcomingMeds.setAdapter(adapter);
 
-        // Set click listener for View Schedule button
         btnViewSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,7 +48,6 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-        // Set click listener for Unlock Box button
         btnUnlockBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +57,6 @@ public class DashboardActivity extends AppCompatActivity {
         });
     }
 
-    // Method to generate mock medication data
     private List<Medication> generateMockData() {
         List<Medication> medications = new ArrayList<>();
         medications.add(new Medication("Medication A", "08:00 AM", "Upcoming"));

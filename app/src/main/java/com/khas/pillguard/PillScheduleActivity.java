@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.khas.pillguard.adapters.MedicationAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,17 +21,14 @@ public class PillScheduleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pill_schedule);
 
-        // Initialize RecyclerView
         rvSchedule = findViewById(R.id.rvSchedule);
 
-        // Set up RecyclerView with mock data
         medicationList = generateMockScheduleData();
         MedicationAdapter adapter = new MedicationAdapter(medicationList);
         rvSchedule.setLayoutManager(new LinearLayoutManager(this));
         rvSchedule.setAdapter(adapter);
     }
 
-    // Method to generate mock schedule data
     private List<Medication> generateMockScheduleData() {
         List<Medication> medications = new ArrayList<>();
         medications.add(new Medication("Medication A", "08:00 AM", "Taken"));

@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Initialize UI components
+        // UI bileşenlerini tanımla
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
@@ -50,24 +50,33 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(LoginActivity.this, R.string.fields_empty, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (email.equals("nurse") && password.equals("nurse")) {
+                    Toast.makeText(LoginActivity.this, "Nurse girişi başarılı!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, NurseInterfaceActivity.class);
+                    startActivity(intent);
+                    finish();
+                    return;
+                }
+
+                Cursor cursor = dbHelper.getReadableDatabase().rawQuery(
+                        "SELECT * FROM Admin WHERE Username = ? AND Password = ?",
+                        new String[]{email, password}
+                );
+
+                if (cursor != null && cursor.moveToFirst()) {
+                    Toast.makeText(LoginActivity.this, "Admin girişi başarılı!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
+                    startActivity(intent);
+                    finish();
                 } else {
-                    Cursor cursor = dbHelper.getReadableDatabase().rawQuery(
-                            "SELECT * FROM Admin WHERE Username = ? AND Password = ?",
-                            new String[]{email, password}
-                    );
+                    Toast.makeText(LoginActivity.this, "Hatalı kullanıcı adı veya şifre!", Toast.LENGTH_SHORT).show();
+                }
 
-                    if (cursor != null && cursor.moveToFirst()) {
-                        Toast.makeText(LoginActivity.this, "Admin girişi başarılı!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LoginActivity.this, AdminDashboardActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Hatalı kullanıcı adı veya şifre!", Toast.LENGTH_SHORT).show();
-                    }
-
-                    if (cursor != null) {
-                        cursor.close();
-                    }
+                if (cursor != null) {
+                    cursor.close();
                 }
             }
         });

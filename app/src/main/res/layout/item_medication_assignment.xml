@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_marginBottom="8dp"
+    android:background="#EEEEEE">
+
+    <TextView
+        android:id="@+id/tvPatient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Patient: "
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvMedication"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Medication: " />
+
+    <TextView
+        android:id="@+id/tvDays"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Days: " />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time: " />
+</LinearLayout>
