@@ -11,6 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.*;
 
 public class ManageScheduleActivity extends AppCompatActivity {
@@ -85,16 +91,56 @@ public class ManageScheduleActivity extends AppCompatActivity {
                 return;
             }
 
+            saveMedicationToServer(patient, medication, selectedDays, selectedTime);
+
             assignmentList.add(new MedicationAssignmentModel(patient, medication, selectedDays, selectedTime));
             adapter.notifyDataSetChanged();
+
             editMedicationName.setText("");
             selectedTime = "Not selected";
             tvSelectedTime.setText("No time selected");
             clearDaySelections();
         });
+
         adapter = new MedicationAssignmentAdapter(assignmentList);
         recyclerAssignments.setLayoutManager(new LinearLayoutManager(this));
         recyclerAssignments.setAdapter(adapter);
+    }
+
+    private void saveMedicationToServer(String patient, String medication, List<String> days, String time) {
+        new Thread(() -> {
+            try {
+                URL url = new URL("http://10.0.2.2:5000/medication");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/json; utf-8");
+                conn.setDoOutput(true);
+
+                JSONObject json = new JSONObject();
+                json.put("patient", patient);
+                json.put("medication", medication);
+                json.put("days", new JSONArray(days));
+                json.put("time", time);
+
+                try (OutputStream os = conn.getOutputStream()) {
+                    byte[] input = json.toString().getBytes("utf-8");
+                    os.write(input, 0, input.length);
+                }
+
+                int responseCode = conn.getResponseCode();
+                runOnUiThread(() -> {
+                    if (responseCode == 200) {
+                        Toast.makeText(this, "Medication assigned successfully!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Server error: " + responseCode, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                runOnUiThread(() -> Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show());
+            }
+        }).start();
     }
 
     private List<String> getSelectedDays() {
